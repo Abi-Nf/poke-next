@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  check_file_formatted:
+    runs-on: ubuntu@latest
+    steps:
+      - name: get to code
+        uses: actions/checkout@v4
+      - name: get nodeJs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - name: CI with npm
+        run: npm CI
+      - name: check formatted files
+        run: npx prettier . --check
